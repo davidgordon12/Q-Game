@@ -28,57 +28,75 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnPlay = new System.Windows.Forms.Button();
+            this.btnDesign = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnPlay
             // 
-            this.button1.Location = new System.Drawing.Point(66, 44);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(269, 130);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnPlay.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlay.ForeColor = System.Drawing.Color.Black;
+            this.btnPlay.Location = new System.Drawing.Point(66, 44);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(269, 130);
+            this.btnPlay.TabIndex = 0;
+            this.btnPlay.Text = "Play";
+            this.btnPlay.UseVisualStyleBackColor = false;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
-            // button2
+            // btnDesign
             // 
-            this.button2.Location = new System.Drawing.Point(460, 44);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(269, 130);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnDesign.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnDesign.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDesign.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDesign.ForeColor = System.Drawing.Color.Black;
+            this.btnDesign.Location = new System.Drawing.Point(460, 44);
+            this.btnDesign.Name = "btnDesign";
+            this.btnDesign.Size = new System.Drawing.Size(269, 130);
+            this.btnDesign.TabIndex = 1;
+            this.btnDesign.Text = "Design";
+            this.btnDesign.UseVisualStyleBackColor = false;
+            this.btnDesign.Click += new System.EventHandler(this.btnDesign_Click);
             // 
-            // button3
+            // btnExit
             // 
-            this.button3.Location = new System.Drawing.Point(260, 243);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(269, 130);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnExit.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.Color.Black;
+            this.btnExit.Location = new System.Drawing.Point(260, 243);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(269, 130);
+            this.btnExit.TabIndex = 2;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.btnDesign);
+            this.Controls.Add(this.btnPlay);
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "Menu";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Menu_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnPlay;
+        private System.Windows.Forms.Button btnDesign;
+        private System.Windows.Forms.Button btnExit;
     }
 }
 

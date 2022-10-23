@@ -16,5 +16,25 @@ namespace DGAssignment2
         {
             InitializeComponent();
         }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDesign_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
