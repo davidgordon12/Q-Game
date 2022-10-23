@@ -86,7 +86,7 @@
             this.Controls.Add(this.btnPlay);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "Menu";
-            this.Text = "Form1";
+            this.Text = "Menu";
             this.Load += new System.EventHandler(this.Menu_Load);
             this.ResumeLayout(false);
 

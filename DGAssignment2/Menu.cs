@@ -24,7 +24,7 @@ namespace DGAssignment2
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -34,7 +34,8 @@ namespace DGAssignment2
 
         private void btnDesign_Click(object sender, EventArgs e)
         {
-
+            Form designForm = new LevelDesign();
+            designForm.Show();
         }
     }
 }
