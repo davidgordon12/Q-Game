@@ -17,6 +17,14 @@ namespace DGAssignment2
             InitializeComponent();
         }
 
+        private void LevelDesign_Load(object sender, EventArgs e)
+        {
+            tblGame.RowStyles.Clear();
+            tblGame.ColumnStyles.Clear();
+
+            ClearGrid();
+        }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -29,7 +37,10 @@ namespace DGAssignment2
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            int rows, columns = 0;
+            ClearGrid();
+
+            int rows = 0, columns = 0;
+
             try
             {
                 rows = Convert.ToByte(txtRows.Text);
@@ -38,6 +49,39 @@ namespace DGAssignment2
             catch(Exception)
             {
                 MessageBox.Show("Please provide valid integers for Rows and Columns fields", "QGame", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            tblGame.ColumnCount = columns;
+            tblGame.RowCount = rows;
+
+            for(int i = 0; i < columns; i++)
+            {
+                tblGame.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(SizeType.AutoSize));
+            }
+
+            for (int i = 0; i < rows; i++)
+            {
+                tblGame.RowStyles.Add(new System.Windows.Forms.ColumnStyle(SizeType.AutoSize));
+            }
+
+            for (int i = 0; i < columns; i++)
+            {
+                for (int j = 0; j < rows; j++)
+                {
+                    var pBox = new PictureBox();
+                    pBox.Height = 70;
+                    pBox.Width = 70;
+                    pBox.BorderStyle = BorderStyle.FixedSingle;
+                    tblGame.Controls.Add(pBox, i, j);
+                }
+            }
+        }
+
+        private void ClearGrid()
+        {
+            while (tblGame.Controls.Count > 0)
+            {
+                tblGame.Controls[0].Dispose();
             }
         }
     }

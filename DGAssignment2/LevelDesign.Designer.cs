@@ -46,11 +46,10 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tblGame = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -61,9 +60,9 @@
             this.panel1.Controls.Add(this.btnGenerate);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 12);
+            this.panel1.Location = new System.Drawing.Point(1, 32);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(932, 84);
+            this.panel1.Size = new System.Drawing.Size(786, 84);
             this.panel1.TabIndex = 0;
             // 
             // txtColumns
@@ -87,7 +86,7 @@
             this.btnGenerate.BackColor = System.Drawing.Color.SteelBlue;
             this.btnGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerate.Location = new System.Drawing.Point(425, 26);
+            this.btnGenerate.Location = new System.Drawing.Point(440, 26);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(199, 39);
             this.btnGenerate.TabIndex = 2;
@@ -125,9 +124,9 @@
             this.panel2.Controls.Add(this.btnWall);
             this.panel2.Controls.Add(this.btnNone);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(0, 95);
+            this.panel2.Location = new System.Drawing.Point(1, 122);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(158, 583);
+            this.panel2.Size = new System.Drawing.Size(175, 629);
             this.panel2.TabIndex = 1;
             // 
             // btnGreenBox
@@ -135,9 +134,9 @@
             this.btnGreenBox.BackColor = System.Drawing.Color.SteelBlue;
             this.btnGreenBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGreenBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGreenBox.Location = new System.Drawing.Point(0, 495);
+            this.btnGreenBox.Location = new System.Drawing.Point(2, 529);
             this.btnGreenBox.Name = "btnGreenBox";
-            this.btnGreenBox.Size = new System.Drawing.Size(155, 82);
+            this.btnGreenBox.Size = new System.Drawing.Size(168, 82);
             this.btnGreenBox.TabIndex = 10;
             this.btnGreenBox.Text = "Green Box";
             this.btnGreenBox.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -148,9 +147,9 @@
             this.btnRedBox.BackColor = System.Drawing.Color.SteelBlue;
             this.btnRedBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRedBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRedBox.Location = new System.Drawing.Point(0, 407);
+            this.btnRedBox.Location = new System.Drawing.Point(2, 441);
             this.btnRedBox.Name = "btnRedBox";
-            this.btnRedBox.Size = new System.Drawing.Size(155, 82);
+            this.btnRedBox.Size = new System.Drawing.Size(168, 82);
             this.btnRedBox.TabIndex = 9;
             this.btnRedBox.Text = "Red Box";
             this.btnRedBox.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -161,9 +160,9 @@
             this.btnGreenDoor.BackColor = System.Drawing.Color.SteelBlue;
             this.btnGreenDoor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGreenDoor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGreenDoor.Location = new System.Drawing.Point(0, 319);
+            this.btnGreenDoor.Location = new System.Drawing.Point(2, 353);
             this.btnGreenDoor.Name = "btnGreenDoor";
-            this.btnGreenDoor.Size = new System.Drawing.Size(155, 82);
+            this.btnGreenDoor.Size = new System.Drawing.Size(168, 82);
             this.btnGreenDoor.TabIndex = 8;
             this.btnGreenDoor.Text = "Green Door";
             this.btnGreenDoor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -174,9 +173,9 @@
             this.btnRedDoor.BackColor = System.Drawing.Color.SteelBlue;
             this.btnRedDoor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRedDoor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRedDoor.Location = new System.Drawing.Point(0, 231);
+            this.btnRedDoor.Location = new System.Drawing.Point(2, 265);
             this.btnRedDoor.Name = "btnRedDoor";
-            this.btnRedDoor.Size = new System.Drawing.Size(155, 82);
+            this.btnRedDoor.Size = new System.Drawing.Size(168, 82);
             this.btnRedDoor.TabIndex = 7;
             this.btnRedDoor.Text = "Red Door";
             this.btnRedDoor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -187,9 +186,9 @@
             this.btnWall.BackColor = System.Drawing.Color.SteelBlue;
             this.btnWall.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnWall.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnWall.Location = new System.Drawing.Point(0, 143);
+            this.btnWall.Location = new System.Drawing.Point(2, 177);
             this.btnWall.Name = "btnWall";
-            this.btnWall.Size = new System.Drawing.Size(155, 82);
+            this.btnWall.Size = new System.Drawing.Size(168, 82);
             this.btnWall.TabIndex = 6;
             this.btnWall.Text = "Wall";
             this.btnWall.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -200,9 +199,9 @@
             this.btnNone.BackColor = System.Drawing.Color.SteelBlue;
             this.btnNone.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNone.Location = new System.Drawing.Point(0, 55);
+            this.btnNone.Location = new System.Drawing.Point(2, 89);
             this.btnNone.Name = "btnNone";
-            this.btnNone.Size = new System.Drawing.Size(155, 82);
+            this.btnNone.Size = new System.Drawing.Size(168, 82);
             this.btnNone.TabIndex = 5;
             this.btnNone.Text = "None";
             this.btnNone.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -212,7 +211,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(35, 12);
+            this.label3.Location = new System.Drawing.Point(36, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 24);
             this.label3.TabIndex = 5;
@@ -220,11 +219,12 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(932, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(791, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -251,35 +251,39 @@
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
-            // dataGridView1
+            // tblGame
             // 
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(158, 96);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(773, 581);
-            this.dataGridView1.TabIndex = 3;
+            this.tblGame.ColumnCount = 2;
+            this.tblGame.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblGame.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblGame.Location = new System.Drawing.Point(182, 122);
+            this.tblGame.Name = "tblGame";
+            this.tblGame.RowCount = 2;
+            this.tblGame.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblGame.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblGame.Size = new System.Drawing.Size(605, 629);
+            this.tblGame.TabIndex = 3;
             // 
             // LevelDesign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(932, 680);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(791, 763);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.tblGame);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "LevelDesign";
             this.Text = "LevelDesign";
+            this.Load += new System.EventHandler(this.LevelDesign_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,6 +309,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TableLayoutPanel tblGame;
     }
 }
