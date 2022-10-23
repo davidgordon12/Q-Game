@@ -72,9 +72,15 @@ namespace DGAssignment2
                     pBox.Height = 70;
                     pBox.Width = 70;
                     pBox.BorderStyle = BorderStyle.FixedSingle;
+                    pBox.Click += pBox_ClickedEvent;
                     tblGame.Controls.Add(pBox, i, j);
                 }
             }
+        }
+
+        void pBox_ClickedEvent(object sender, EventArgs e)
+        {
+            (sender as PictureBox).BackColor = Color.Black;
         }
 
         private void ClearGrid()
