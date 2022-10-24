@@ -1,17 +1,19 @@
-﻿using System;
+﻿using DGAssignment2.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DGAssignment2
 {
     public partial class LevelDesign : Form
     {
+        Image image;
+
         public LevelDesign()
         {
             InitializeComponent();
@@ -56,12 +58,12 @@ namespace DGAssignment2
 
             for(int i = 0; i < columns; i++)
             {
-                tblGame.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(SizeType.AutoSize));
+                tblGame.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
             }
 
             for (int i = 0; i < rows; i++)
             {
-                tblGame.RowStyles.Add(new System.Windows.Forms.ColumnStyle(SizeType.AutoSize));
+                tblGame.RowStyles.Add(new ColumnStyle(SizeType.AutoSize));
             }
 
             for (int i = 0; i < columns; i++)
@@ -80,7 +82,7 @@ namespace DGAssignment2
 
         void pBox_ClickedEvent(object sender, EventArgs e)
         {
-            (sender as PictureBox).BackColor = Color.Black;
+            (sender as PictureBox).Image = image;
         }
 
         private void ClearGrid()
@@ -88,6 +90,62 @@ namespace DGAssignment2
             while (tblGame.Controls.Count > 0)
             {
                 tblGame.Controls[0].Dispose();
+            }
+        }
+
+        private void btnImageType_Click(object sender, EventArgs e)
+        {
+            string imageControl = (sender as Control).Name;
+
+            switch(imageControl)
+            {
+                case "btnNone":
+                    image = Resources._null;
+                    break;
+
+                case "pbNone":
+                    image = Resources._null;
+                    break;
+
+                case "btnWall":
+                    image = Resources.wall;
+                    break;
+
+                case "pbWall":
+                    image = Resources.wall;
+                    break;
+
+                case "btnRedDoor":
+                    image = Resources.redDoor;
+                    break;
+
+                case "pbRedDoor":
+                    image = Resources.redDoor;
+                    break;
+
+                case "btnGreenDoor":
+                    image = Resources.greenDoor;
+                    break;
+
+                case "pbGreenDoor":
+                    image = Resources.greenDoor;
+                    break;
+
+                case "btnRedBox":
+                    image = Resources.redBox;
+                    break;
+
+                case "pbRedBox":
+                    image = Resources.redBox;
+                    break;
+
+                case "btnGreenBox":
+                    image = Resources.greenBox;
+                    break;
+
+                case "pbGreenBox":
+                    image = Resources.greenBox;
+                    break;
             }
         }
     }

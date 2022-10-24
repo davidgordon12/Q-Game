@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LevelDesign));
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtColumns = new System.Windows.Forms.TextBox();
             this.txtRows = new System.Windows.Forms.TextBox();
@@ -35,6 +36,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pbGreenBox = new System.Windows.Forms.PictureBox();
+            this.pbRedBox = new System.Windows.Forms.PictureBox();
+            this.pbNone = new System.Windows.Forms.PictureBox();
+            this.pbGreenDoor = new System.Windows.Forms.PictureBox();
+            this.pbRedDoor = new System.Windows.Forms.PictureBox();
+            this.pbWall = new System.Windows.Forms.PictureBox();
             this.btnGreenBox = new System.Windows.Forms.Button();
             this.btnRedBox = new System.Windows.Forms.Button();
             this.btnGreenDoor = new System.Windows.Forms.Button();
@@ -49,6 +56,12 @@
             this.tblGame = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGreenBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRedBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNone)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGreenDoor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRedDoor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWall)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,6 +130,12 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.pbGreenBox);
+            this.panel2.Controls.Add(this.pbRedBox);
+            this.panel2.Controls.Add(this.pbNone);
+            this.panel2.Controls.Add(this.pbGreenDoor);
+            this.panel2.Controls.Add(this.pbRedDoor);
+            this.panel2.Controls.Add(this.pbWall);
             this.panel2.Controls.Add(this.btnGreenBox);
             this.panel2.Controls.Add(this.btnRedBox);
             this.panel2.Controls.Add(this.btnGreenDoor);
@@ -128,6 +147,66 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(175, 629);
             this.panel2.TabIndex = 1;
+            // 
+            // pbGreenBox
+            // 
+            this.pbGreenBox.Image = global::DGAssignment2.Properties.Resources.greenBox;
+            this.pbGreenBox.Location = new System.Drawing.Point(3, 535);
+            this.pbGreenBox.Name = "pbGreenBox";
+            this.pbGreenBox.Size = new System.Drawing.Size(70, 70);
+            this.pbGreenBox.TabIndex = 16;
+            this.pbGreenBox.TabStop = false;
+            this.pbGreenBox.Click += new System.EventHandler(this.btnImageType_Click);
+            // 
+            // pbRedBox
+            // 
+            this.pbRedBox.Image = global::DGAssignment2.Properties.Resources.redBox;
+            this.pbRedBox.Location = new System.Drawing.Point(3, 447);
+            this.pbRedBox.Name = "pbRedBox";
+            this.pbRedBox.Size = new System.Drawing.Size(70, 70);
+            this.pbRedBox.TabIndex = 15;
+            this.pbRedBox.TabStop = false;
+            this.pbRedBox.Click += new System.EventHandler(this.btnImageType_Click);
+            // 
+            // pbNone
+            // 
+            this.pbNone.Image = ((System.Drawing.Image)(resources.GetObject("pbNone.Image")));
+            this.pbNone.Location = new System.Drawing.Point(3, 95);
+            this.pbNone.Name = "pbNone";
+            this.pbNone.Size = new System.Drawing.Size(70, 70);
+            this.pbNone.TabIndex = 14;
+            this.pbNone.TabStop = false;
+            this.pbNone.Click += new System.EventHandler(this.btnImageType_Click);
+            // 
+            // pbGreenDoor
+            // 
+            this.pbGreenDoor.Image = global::DGAssignment2.Properties.Resources.greenDoor;
+            this.pbGreenDoor.Location = new System.Drawing.Point(3, 359);
+            this.pbGreenDoor.Name = "pbGreenDoor";
+            this.pbGreenDoor.Size = new System.Drawing.Size(70, 70);
+            this.pbGreenDoor.TabIndex = 13;
+            this.pbGreenDoor.TabStop = false;
+            this.pbGreenDoor.Click += new System.EventHandler(this.btnImageType_Click);
+            // 
+            // pbRedDoor
+            // 
+            this.pbRedDoor.Image = global::DGAssignment2.Properties.Resources.redDoor;
+            this.pbRedDoor.Location = new System.Drawing.Point(3, 271);
+            this.pbRedDoor.Name = "pbRedDoor";
+            this.pbRedDoor.Size = new System.Drawing.Size(70, 70);
+            this.pbRedDoor.TabIndex = 12;
+            this.pbRedDoor.TabStop = false;
+            this.pbRedDoor.Click += new System.EventHandler(this.btnImageType_Click);
+            // 
+            // pbWall
+            // 
+            this.pbWall.Image = global::DGAssignment2.Properties.Resources.wall;
+            this.pbWall.Location = new System.Drawing.Point(3, 183);
+            this.pbWall.Name = "pbWall";
+            this.pbWall.Size = new System.Drawing.Size(70, 70);
+            this.pbWall.TabIndex = 11;
+            this.pbWall.TabStop = false;
+            this.pbWall.Click += new System.EventHandler(this.btnImageType_Click);
             // 
             // btnGreenBox
             // 
@@ -141,6 +220,7 @@
             this.btnGreenBox.Text = "Green Box";
             this.btnGreenBox.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGreenBox.UseVisualStyleBackColor = false;
+            this.btnGreenBox.Click += new System.EventHandler(this.btnImageType_Click);
             // 
             // btnRedBox
             // 
@@ -154,6 +234,7 @@
             this.btnRedBox.Text = "Red Box";
             this.btnRedBox.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRedBox.UseVisualStyleBackColor = false;
+            this.btnRedBox.Click += new System.EventHandler(this.btnImageType_Click);
             // 
             // btnGreenDoor
             // 
@@ -167,6 +248,7 @@
             this.btnGreenDoor.Text = "Green Door";
             this.btnGreenDoor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGreenDoor.UseVisualStyleBackColor = false;
+            this.btnGreenDoor.Click += new System.EventHandler(this.btnImageType_Click);
             // 
             // btnRedDoor
             // 
@@ -180,6 +262,7 @@
             this.btnRedDoor.Text = "Red Door";
             this.btnRedDoor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRedDoor.UseVisualStyleBackColor = false;
+            this.btnRedDoor.Click += new System.EventHandler(this.btnImageType_Click);
             // 
             // btnWall
             // 
@@ -193,6 +276,7 @@
             this.btnWall.Text = "Wall";
             this.btnWall.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnWall.UseVisualStyleBackColor = false;
+            this.btnWall.Click += new System.EventHandler(this.btnImageType_Click);
             // 
             // btnNone
             // 
@@ -206,6 +290,7 @@
             this.btnNone.Text = "None";
             this.btnNone.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNone.UseVisualStyleBackColor = false;
+            this.btnNone.Click += new System.EventHandler(this.btnImageType_Click);
             // 
             // label3
             // 
@@ -282,6 +367,12 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGreenBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRedBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNone)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGreenDoor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRedDoor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWall)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -310,5 +401,11 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tblGame;
+        private System.Windows.Forms.PictureBox pbGreenBox;
+        private System.Windows.Forms.PictureBox pbRedBox;
+        private System.Windows.Forms.PictureBox pbNone;
+        private System.Windows.Forms.PictureBox pbGreenDoor;
+        private System.Windows.Forms.PictureBox pbRedDoor;
+        private System.Windows.Forms.PictureBox pbWall;
     }
 }
