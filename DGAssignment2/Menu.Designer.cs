@@ -43,6 +43,7 @@
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(269, 130);
             this.btnPlay.TabIndex = 0;
+            this.btnPlay.TabStop = false;
             this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = false;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
@@ -57,6 +58,7 @@
             this.btnDesign.Name = "btnDesign";
             this.btnDesign.Size = new System.Drawing.Size(269, 130);
             this.btnDesign.TabIndex = 1;
+            this.btnDesign.TabStop = false;
             this.btnDesign.Text = "Design";
             this.btnDesign.UseVisualStyleBackColor = false;
             this.btnDesign.Click += new System.EventHandler(this.btnDesign_Click);
@@ -71,6 +73,7 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(269, 130);
             this.btnExit.TabIndex = 2;
+            this.btnExit.TabStop = false;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
