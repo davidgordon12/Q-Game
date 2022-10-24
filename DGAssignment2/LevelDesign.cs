@@ -1,11 +1,6 @@
 ﻿using DGAssignment2.Properties;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace DGAssignment2
@@ -29,7 +24,7 @@ namespace DGAssignment2
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
