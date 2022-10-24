@@ -1,6 +1,8 @@
 ﻿using DGAssignment2.Properties;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DGAssignment2
@@ -28,6 +30,7 @@ namespace DGAssignment2
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            List<string> tiles = new List<string>();
             int[,] level = new int[columns, rows];
             int block = 0;
             for (int i = 0; i < columns; i++)
@@ -63,8 +66,34 @@ namespace DGAssignment2
                     // save that in a 2D array so we can easily write
                     // the index and value to the text file for saving
                     level[i, j] = block;
+                    tiles.Add(j.ToString());
+                    tiles.Add(i.ToString());
+                    tiles.Add(block.ToString());
                 }
             }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "QGame Level|*.qgame";
+            saveFileDialog.Title = "Save QGame Level";
+            saveFileDialog.ShowDialog();
+
+            // if the file name is not an empty string open it for saving.
+            if (saveFileDialog.FileName != "")
+            {
+                // saves the file via a FileStream created when OpenFile was called
+                FileStream fs = (FileStream)saveFileDialog.OpenFile();
+
+                // write each line to the file in the format, ROW, COLUMN, BLOCK
+                using (StreamWriter writer = new StreamWriter(fs))
+                {
+                    foreach (string tile in tiles)
+                    {
+                        writer.WriteLine(tile);
+                    }
+                }
+            }
+
+            
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
