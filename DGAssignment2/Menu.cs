@@ -29,7 +29,23 @@ namespace DGAssignment2
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "QGame Level|*.qgame";
+            openFileDialog.Title = "Open QGame Level";
+            openFileDialog.ShowDialog();
+            try
+            {
+                // if a valid file was selected, load it into the Play form
+                var file = openFileDialog.OpenFile();
+                Form gameForm = new Play(file);
+                gameForm.Show();
+            }
+            catch (Exception)
+            {
+                // otherwise cancel the execution
+                openFileDialog.Dispose();
+                MessageBox.Show("Invalid file selected", "QGame", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDesign_Click(object sender, EventArgs e)
