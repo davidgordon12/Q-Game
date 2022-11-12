@@ -31,6 +31,7 @@ namespace DGAssignment2
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<string> tiles = new List<string>();
+            int none = 0, walls = 0, doors = 0, boxes = 0;
             int[,] level = new int[columns, rows];
             int block = 0;
             for (int i = 0; i < columns; i++)
@@ -38,28 +39,34 @@ namespace DGAssignment2
                 for (int j = 0; j < rows; j++)
                 {
                     var pBox = tblGame.GetControlFromPosition(i, j);
-                    
+
 
                     // look for the image name to know which type of block it was
-                    switch(pBox.Name)
+                    switch (pBox.Name)
                     {
                         case "0":
                             block = 0;
+                            none++;
                             break;
                         case "1":
                             block = 1;
+                            walls++;
                             break;
                         case "2":
                             block = 2;
+                            doors++;
                             break;
                         case "3":
                             block = 3;
+                            doors++;
                             break;
                         case "4":
                             block = 4;
+                            boxes++;
                             break;
                         case "5":
                             block = 5;
+                            boxes++;
                             break;
                     }
 
@@ -93,7 +100,12 @@ namespace DGAssignment2
                 }
             }
 
-            
+            // show success message and other data
+            MessageBox.Show("File saved successfully:\n" +
+                $"Total number of walls: {walls}\n" +
+                $"Total number of doors: {doors}\n" +
+                $"Total number of boxes: {boxes}", "QGame", 
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
