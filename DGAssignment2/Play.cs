@@ -14,10 +14,10 @@ namespace DGAssignment2
 {
     public partial class Play : Form
     {
-        private Stream levelFile;
+        private string levelFile;
         int ROWS = 0, COLS = 0;
 
-        public Play(Stream levelFile)
+        public Play(string levelFile)
         {
             this.levelFile = levelFile;
             InitializeComponent();
@@ -26,45 +26,25 @@ namespace DGAssignment2
         private void Play_Load(object sender, EventArgs e)
         {
             // initialize grid
-            List<string> levelGrid = new List<string>();
+            var levelGrid = File.ReadAllLines(levelFile);
 
-            using (var sr = new StreamReader(levelFile))
+            // get the number of rows
+            for(int i = 0; i < levelGrid.Length; i+=3)
             {
-                while(sr.ReadLine() != null)
+                if (Convert.ToInt32(levelGrid[i]) < Convert.ToInt32(levelGrid[i + 3]))
                 {
-                    levelGrid.Add(sr.ReadLine());
+                    ROWS++;
+                }
+                else
+                {
+                    ROWS++;
+                    break;
                 }
             }
-            List<int> entity = new List<int>();
 
-            // get rows
-            for (int i = 0; i < levelGrid.ToList().Count; i+=2)
-            {
-                ROWS++;
-            }
-            // get columns
-            for (int i = 1; i < levelGrid.ToList().Count; i += 2)
-            {
-                COLS++;
-            }
+            COLS = (levelGrid.Length / 3) / ROWS;
 
-            // create game board
-            int[,] level = new int[COLS, ROWS];
-
-            // get all the game level's entites
-            for (int i = 2; i < levelGrid.ToList().Count; i += 2)
-            {
-                entity.Add(Convert.ToInt32(levelGrid.ToList()[i]));
-            }
-
-            // populate the array
-            for(int i = 0; i < COLS; i++)
-            {
-                for (int j = 0; j < ROWS; j++)
-                {
-                    level[i, j] = entity[i];
-                }
-            }
+            MessageBox.Show(ROWS.ToString() + COLS.ToString());
         }
 
         void Draw(int[,] level)
@@ -87,7 +67,7 @@ namespace DGAssignment2
             }
 
             // creates the grid of picture boxes and initializes
-            // them to the empty square type
+            // them to the level's value
             for (int i = 0; i < COLS; i++)
             {
                 for (int j = 0; j < ROWS; j++)
