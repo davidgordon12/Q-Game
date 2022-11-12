@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,17 +33,14 @@ namespace DGAssignment2
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "QGame Level|*.qgame";
             openFileDialog.Title = "Open QGame Level";
-            openFileDialog.ShowDialog();
-            try
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // if a valid file was selected, load it into the Play form
-                var file = openFileDialog.OpenFile();
+                string file = openFileDialog.FileName;
                 Form gameForm = new Play(file);
                 gameForm.Show();
             }
-            catch (Exception)
+            else
             {
-                // otherwise cancel the execution
                 openFileDialog.Dispose();
                 MessageBox.Show("Invalid file selected", "QGame", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
