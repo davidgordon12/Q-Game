@@ -33,6 +33,8 @@
             // 
             // tblGame
             // 
+            this.tblGame.AutoSize = true;
+            this.tblGame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tblGame.ColumnCount = 2;
             this.tblGame.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblGame.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -41,7 +43,7 @@
             this.tblGame.RowCount = 2;
             this.tblGame.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblGame.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblGame.Size = new System.Drawing.Size(935, 858);
+            this.tblGame.Size = new System.Drawing.Size(0, 0);
             this.tblGame.TabIndex = 0;
             // 
             // Play
@@ -54,6 +56,7 @@
             this.Text = "Play";
             this.Load += new System.EventHandler(this.Play_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
