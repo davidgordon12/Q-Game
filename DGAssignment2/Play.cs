@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -89,17 +90,40 @@ namespace DGAssignment2
                 tblGame.RowStyles.Add(new ColumnStyle(SizeType.AutoSize));
             }
 
-            // creates the grid of picture boxes and initializes
-            // them to the level's value
+            // creates the grid of picture boxes and assigns each
+            // cell to the level's value
             for (int i = 0; i < COLS; i++)
             {
                 for (int j = 0; j < ROWS; j++)
                 {
+                    var image = Resources._null;
+                    switch(level[i, j])
+                    {
+                        case 0:
+                            image = Resources._null;
+                            break;
+                        case 1:
+                            image = Resources.wall;
+                            break;
+                        case 2:
+                            image = Resources.redDoor;
+                            break;
+                        case 3:
+                            image = Resources.greenDoor;
+                            break;
+                        case 4:
+                            image = Resources.redBox;
+                            break;
+                        case 5:
+                            image = Resources.greenBox;
+                            break;
+                    }
+
                     var pBox = new PictureBox();
                     pBox.Height = 70;
                     pBox.Width = 70;
                     pBox.BorderStyle = BorderStyle.FixedSingle;
-                    pBox.Image = Resources._null;
+                    pBox.Image = image;
                     pBox.Name = "0";
                     tblGame.Controls.Add(pBox, i, j);
                 }
