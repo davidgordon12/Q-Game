@@ -32,6 +32,54 @@ namespace DGAssignment2
             tblGame2.MaximumSize = new Size(950, 950);
         }
 
+        void LoadGame(string levelFile)
+        {
+            // initialize grid
+            var levelGrid = File.ReadAllLines(levelFile);
+
+            List<int> cellData = new List<int>();
+
+            // get all the cell values
+            for (int i = 2; i < levelGrid.ToList().Count; i += 3)
+            {
+                cellData.Add(Convert.ToInt32(levelGrid[i]));
+            }
+
+            // get the number of rows
+            for (int i = 0; i < levelGrid.Length; i += 3)
+            {
+                if (Convert.ToInt32(levelGrid[i]) < Convert.ToInt32(levelGrid[i + 3]))
+                {
+                    ROWS++;
+                }
+                else
+                {
+                    ROWS++;
+                    break;
+                }
+            }
+
+            // get the number of columns
+            COLS = (levelGrid.Length / 3) / ROWS;
+
+            int[,] level = new int[COLS, ROWS];
+
+            int buf = 0;
+            for (int i = 0; i < COLS; i++)
+            {
+                for (int j = 0; j < ROWS; j++)
+                {
+                    level[i, j] = cellData[buf];
+                    buf++;
+                }
+            }
+
+            this.level = level;
+
+            // Draw the game board
+            Draw(level);
+        }
+
         void Draw(int[,] level)
         {
             ClearGrid(); // calls the clear grid function I created
@@ -109,6 +157,29 @@ namespace DGAssignment2
             timer1.Enabled = true;
         }
 
+        private void loadGameToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "QGame Level|*.qgame";
+            openFileDialog.Title = "Open QGame Level";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                LoadGame(openFileDialog.FileName);
+                foreach (var control in Controls)
+                {
+                    if (control is Button)
+                    {
+                        (control as Button).Enabled = true;
+                    }
+                }
+            }
+            else
+            {
+                openFileDialog.Dispose();
+                MessageBox.Show("Invalid file selected", "QGame", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         void pBox_ClickedEvent(object sender, EventArgs e)
         {
             if (activeBox != null)
@@ -143,54 +214,7 @@ namespace DGAssignment2
             timer1.Enabled = false;
             timer1.Dispose();
             MessageBox.Show("You win!", "QGame", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-
-        void LoadGame(string levelFile)
-        {
-            // initialize grid
-            var levelGrid = File.ReadAllLines(levelFile);
-
-            List<int> cellData = new List<int>();
-
-            // get all the cell values
-            for (int i = 2; i < levelGrid.ToList().Count; i += 3)
-            {
-                cellData.Add(Convert.ToInt32(levelGrid[i]));
-            }
-
-            // get the number of rows
-            for (int i = 0; i < levelGrid.Length; i += 3)
-            {
-                if (Convert.ToInt32(levelGrid[i]) < Convert.ToInt32(levelGrid[i + 3]))
-                {
-                    ROWS++;
-                }
-                else
-                {
-                    ROWS++;
-                    break;
-                }
-            }
-
-            // get the number of columns
-            COLS = (levelGrid.Length / 3) / ROWS;
-
-            int[,] level = new int[COLS, ROWS];
-
-            int buf = 0;
-            for (int i = 0; i < COLS; i++)
-            {
-                for (int j = 0; j < ROWS; j++)
-                {
-                    level[i, j] = cellData[buf];
-                    buf++;
-                }
-            }
-
-            this.level = level;
-
-            // Draw the game board
-            Draw(level);
+            FindForm().Close();
         }
 
         private void moveBox_Event(object sender, EventArgs e)
@@ -201,16 +225,16 @@ namespace DGAssignment2
             switch ((sender as Button).Name)
             {
                 case "btnUp":
-                    MoveUp();
+                    Move("Row", -1);
                     break;
                 case "btnDown":
-                    MoveDown();
+                    Move("Row", 1);
                     break;
                 case "btnLeft":
-                    MoveLeft();
+                    Move("Column", -1);
                     break;
                 case "btnRight":
-                    MoveRight();
+                    Move("Column", 1);
                     break;
             }
 
@@ -219,43 +243,31 @@ namespace DGAssignment2
             lblMoveCounter.Text = $"Total Moves: {moves}";
         }
 
-        void MoveUp()
+        new void Move(string direction, int value)
         {
             var currentPosition = tblGame2.GetPositionFromControl(activeBox);
 
-            // get the box control within the tableLayoutPanel
-            Control box = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
+            if (direction == "Row")
+            {
+                // get the box control within the tableLayoutPanel
+                Control box = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
 
-            // and get the picturebox where we want our box to go
-            Control cellToSwap = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row - 1);
+                // and get the picturebox where we want our box to go
+                Control cellToSwap = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row + value);
 
-            SwapCellsVertical(box, cellToSwap, -1);
-        }
-        void MoveDown()
-        {
-            var currentPosition = tblGame2.GetPositionFromControl(activeBox);
-            Control box = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
-            Control cellToSwap = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row + 1);
+                SwapCellsVertical(box, cellToSwap, direction, value);
+            }
+            if (direction == "Column")
+            {
+                // get the box control within the tableLayoutPanel
+                Control box = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
 
-            SwapCellsVertical(box, cellToSwap, 1);
-        }
-        void MoveLeft()
-        {
-            var currentPosition = tblGame2.GetPositionFromControl(activeBox);
-            Control box = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
-            Control cellToSwap = tblGame2.GetControlFromPosition(currentPosition.Column - 1, currentPosition.Row);
+                // and get the picturebox where we want our box to go
+                Control cellToSwap = tblGame2.GetControlFromPosition(currentPosition.Column + value, currentPosition.Row);
 
-            SwapCellsHorizontal(box, cellToSwap, -1);
-        }
+                SwapCellsVertical(box, cellToSwap, direction, value);
+            }
 
-        void MoveRight()
-        {
-            // how far can we move down? find out
-            var currentPosition = tblGame2.GetPositionFromControl(activeBox);
-            Control box = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
-            Control cellToSwap = tblGame2.GetControlFromPosition(currentPosition.Column + 1, currentPosition.Row);
-
-            SwapCellsHorizontal(box, cellToSwap, 1);
         }
 
         /// <summary>
@@ -264,8 +276,8 @@ namespace DGAssignment2
         /// <param name="box">The Box control</param>
         /// <param name="cellToSwap">The cell where the Box is to be moved</param>
         /// <param name="direction">The direction to move the Box (+1 or -1)</param>
-        void SwapCellsHorizontal( 
-            Control box, Control cellToSwap, int direction)
+        void SwapCellsHorizontal(
+            Control box, Control cellToSwap, string direction, int value)
         {
             if (cellToSwap.Name == "1")
             {
@@ -305,15 +317,7 @@ namespace DGAssignment2
             tblGame2.SetCellPosition(cellToSwap, buffer);
 
             // call the method again to see if we can move even farther
-            switch(direction)
-            {
-                case -1:
-                    MoveLeft();
-                    break;
-                case 1:
-                    MoveRight();
-                    break;
-            }
+            Move(direction, value);
         }
 
         /// <summary>
@@ -323,7 +327,7 @@ namespace DGAssignment2
         /// <param name="cellToSwap">The cell where the Box is to be moved</param>
         /// <param name="direction">The direction to move the Box (+1 or -1)</param>
         void SwapCellsVertical(
-            Control box, Control cellToSwap, int direction)
+            Control box, Control cellToSwap, string direction, int value)
         {
             if (cellToSwap.Name == "1")
             {
@@ -365,15 +369,7 @@ namespace DGAssignment2
             tblGame2.SetCellPosition(cellToSwap, buffer);
 
             // call the method again to see if we can move even farther
-            switch (direction)
-            {
-                case -1:
-                    MoveUp();
-                    break;
-                case 1:
-                    MoveDown();
-                    break;
-            }
+            Move(direction, value);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -387,29 +383,6 @@ namespace DGAssignment2
         private void closeToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             FindForm().Close();
-        }
-
-        private void loadGameToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "QGame Level|*.qgame";
-            openFileDialog.Title = "Open QGame Level";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                LoadGame(openFileDialog.FileName);
-                foreach (var control in Controls)
-                {
-                    if (control is Button)
-                    {
-                        (control as Button).Enabled = true;
-                    }
-                }
-            }
-            else
-            {
-                openFileDialog.Dispose();
-                MessageBox.Show("Invalid file selected", "QGame", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         void ClearGrid()
