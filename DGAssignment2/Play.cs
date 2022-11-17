@@ -21,6 +21,7 @@ namespace DGAssignment2
         PictureBox activeBox;
         int ROWS = 0, COLS = 0;
         int[,] level;
+        int moves, boxes = 0;
         public Play()
         {
             InitializeComponent();
@@ -90,21 +91,27 @@ namespace DGAssignment2
                     pBox.Height = 70;
                     pBox.Width = 70;
                     pBox.BorderStyle = BorderStyle.None;
-                    if(name != "0")
+                    if (name != "0")
                         pBox.Image = image;
                     pBox.Name = name;
                     pBox.Click += pBox_ClickedEvent;
                     tblGame2.Controls.Add(pBox, i, j);
                 }
             }
+            // check box count
+            foreach (Control control in tblGame2.Controls)
+            {
+                if (control.Name == "4" || control.Name == "5")
+                    boxes++;
+            }
+            lblBoxCounter.Text = $"Boxes Left: {boxes}";
 
-            lblBoxCounter.Text = "Boxes left: 2";
-            lblBoxCounter.Text = "Boxes left: 2";
+            timer1.Enabled = true;
         }
 
         void pBox_ClickedEvent(object sender, EventArgs e)
         {
-            if(activeBox != null)
+            if (activeBox != null)
                 activeBox.BorderStyle = BorderStyle.None;
 
             // checks to see which box was clicked on
@@ -119,6 +126,23 @@ namespace DGAssignment2
                 activeBox = sender as PictureBox;
                 activeBox.BorderStyle = BorderStyle.Fixed3D;
             }
+        }
+
+        void EndGame()
+        {
+            foreach (var control in Controls)
+            {
+                if (control is Button)
+                {
+                    (control as Button).Enabled = false;
+                }
+            }
+
+            tblGame2.Dispose();
+            timer1.Stop();
+            timer1.Enabled = false;
+            timer1.Dispose();
+            MessageBox.Show("You win!", "QGame", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         void LoadGame(string levelFile)
@@ -174,8 +198,6 @@ namespace DGAssignment2
             if (activeBox is null)
                 MessageBox.Show("Select a box", "QGame", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            // DONT MOVE CELL, JUST SWAP PICTUREBOX IMAGES INSTEAD
-
             switch ((sender as Button).Name)
             {
                 case "btnUp":
@@ -191,6 +213,10 @@ namespace DGAssignment2
                     MoveRight();
                     break;
             }
+
+            // increment total move count after each move attempt
+            moves++;
+            lblMoveCounter.Text = $"Total Moves: {moves}";
         }
 
         void MoveUp()
@@ -198,36 +224,48 @@ namespace DGAssignment2
             // how far can we move down? find out
             var currentPosition = tblGame2.GetPositionFromControl(activeBox);
 
-            Control c1 = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
-            Control c2 = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row - 1);
+            // get the box control within the tableLayoutPanel
+            Control box = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
 
-            if (c2.Name == "1")
+            // and get the picturebox where we want our box to go
+            Control cellToSwap = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row - 1);
+
+            if (cellToSwap.Name == "1")
             {
                 // if this control is a wall, we cannot move further
                 return;
             }
 
-            if (c2.Name == "4" && activeBox.Name == "2")
+            if (cellToSwap.Name == "2" && activeBox.Name == "4")
             {
-                // box and door match, remove box
+                tblGame2.Controls.Remove(activeBox);
+                boxes--;
+                lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
             }
 
-            if (c2.Name == "5" && activeBox.Name == "3")
+            if (cellToSwap.Name == "3" && activeBox.Name == "5")
             {
-                // box and door match, remove box
+                tblGame2.Controls.Remove(activeBox);
+                boxes--;
+                lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
             }
 
-            if (c2.Name != "0")
+            if (cellToSwap.Name != "0")
             {
                 // if none of the win conditions were met, and the next space isn't null, return
                 return;
             }
 
-            TableLayoutPanelCellPosition cell1 = tblGame2.GetCellPosition(c1);
-            tblGame2.SetCellPosition(c1, tblGame2.GetCellPosition(c2));
-            tblGame2.SetCellPosition(c2, cell1);
+            // get the box current location and store it in this buffer
+            TableLayoutPanelCellPosition buffer = tblGame2.GetCellPosition(box);
+
+            // set the cell position of the box to it's new cell
+            tblGame2.SetCellPosition(box, tblGame2.GetCellPosition(cellToSwap));
+
+            // and place the old cell where the box was before
+            tblGame2.SetCellPosition(cellToSwap, buffer);
 
             // call the method again to see if we can move even farther
             MoveUp();
@@ -237,36 +275,45 @@ namespace DGAssignment2
             // how far can we move down? find out
             var currentPosition = tblGame2.GetPositionFromControl(activeBox);
 
-            Control c1 = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
-            Control c2 = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row + 1);
+            Control box = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
+            Control cellToSwap = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row + 1);
 
-            if(c2.Name == "1")
+            if (cellToSwap.Name == "1")
             {
                 // if this control is a wall, we cannot move further
                 return;
             }
 
-            if (c2.Name == "4" && activeBox.Name == "2")
+            if (cellToSwap.Name == "2" && activeBox.Name == "4")
             {
-                // box and door match, remove box
+                tblGame2.Controls.Remove(activeBox);
+                boxes--;
+                lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
             }
 
-            if (c2.Name == "5" && activeBox.Name == "3")
+            if (cellToSwap.Name == "3" && activeBox.Name == "5")
             {
-                // box and door match, remove box
+                tblGame2.Controls.Remove(activeBox);
+                boxes--;
+                lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
             }
 
-            if(c2.Name != "0")
+            if (cellToSwap.Name != "0")
             {
                 // if none of the win conditions were met, and the next space isn't null, return
                 return;
             }
 
-            TableLayoutPanelCellPosition cell1 = tblGame2.GetCellPosition(c1);
-            tblGame2.SetCellPosition(c1, tblGame2.GetCellPosition(c2));
-            tblGame2.SetCellPosition(c2, cell1);
+            // get the box current location and store it in this buffer
+            TableLayoutPanelCellPosition buffer = tblGame2.GetCellPosition(box);
+
+            // set the cell position of the box to it's new cell
+            tblGame2.SetCellPosition(box, tblGame2.GetCellPosition(cellToSwap));
+
+            // and place the old cell where the box was before
+            tblGame2.SetCellPosition(cellToSwap, buffer);
 
             // call the method again to see if we can move even farther
             MoveDown();
@@ -276,83 +323,109 @@ namespace DGAssignment2
             // how far can we move down? find out
             var currentPosition = tblGame2.GetPositionFromControl(activeBox);
 
-            Control c1 = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
-            Control c2 = tblGame2.GetControlFromPosition(currentPosition.Column - 1, currentPosition.Row);
+            Control box = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
+            Control cellToSwap = tblGame2.GetControlFromPosition(currentPosition.Column - 1, currentPosition.Row);
 
-            if (c2.Name == "1")
+            if (cellToSwap.Name == "1")
             {
                 // if this control is a wall, we cannot move further
                 return;
             }
 
-            if (c2.Name == "4" && activeBox.Name == "2")
+            if (cellToSwap.Name == "2" && activeBox.Name == "4")
             {
-                // box and door match, remove box
+                tblGame2.Controls.Remove(activeBox);
+                boxes--;
+                lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
             }
 
-            if (c2.Name == "5" && activeBox.Name == "3")
+            if (cellToSwap.Name == "3" && activeBox.Name == "5")
             {
-                // box and door match, remove box
+                tblGame2.Controls.Remove(activeBox);
+                boxes--;
+                lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
             }
 
-            if (c2.Name != "0")
+            if (cellToSwap.Name != "0")
             {
                 // if none of the win conditions were met, and the next space isn't null, return
                 return;
             }
 
-            TableLayoutPanelCellPosition cell1 = tblGame2.GetCellPosition(c1);
-            tblGame2.SetCellPosition(c1, tblGame2.GetCellPosition(c2));
-            tblGame2.SetCellPosition(c2, cell1);
+            // get the box current location and store it in this buffer
+            TableLayoutPanelCellPosition buffer = tblGame2.GetCellPosition(box);
+
+            // set the cell position of the box to it's new cell
+            tblGame2.SetCellPosition(box, tblGame2.GetCellPosition(cellToSwap));
+
+            // and place the old cell where the box was before
+            tblGame2.SetCellPosition(cellToSwap, buffer);
 
             // call the method again to see if we can move even farther
             MoveLeft();
         }
+
         void MoveRight()
         {
             // how far can we move down? find out
             var currentPosition = tblGame2.GetPositionFromControl(activeBox);
 
-            Control c1 = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
-            Control c2 = tblGame2.GetControlFromPosition(currentPosition.Column + 1, currentPosition.Row);
+            Control box = tblGame2.GetControlFromPosition(currentPosition.Column, currentPosition.Row);
+            Control cellToSwap = tblGame2.GetControlFromPosition(currentPosition.Column + 1, currentPosition.Row);
 
-            if (c2.Name == "1")
+            if (cellToSwap.Name == "1")
             {
                 // if this control is a wall, we cannot move further
                 return;
             }
 
-            if (c2.Name == "4" && activeBox.Name == "2")
+            if (cellToSwap.Name == "2" && activeBox.Name == "4")
             {
-                // box and door match, remove box
+                tblGame2.Controls.Remove(activeBox);
+                boxes--;
+                lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
             }
 
-            if (c2.Name == "5" && activeBox.Name == "3")
+            if (cellToSwap.Name == "3" && activeBox.Name == "5")
             {
-                // box and door match, remove box
+                tblGame2.Controls.Remove(activeBox);
+                boxes--;
+                lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
             }
 
-            if (c2.Name != "0")
+            if (cellToSwap.Name != "0")
             {
                 // if none of the win conditions were met, and the next space isn't null, return
                 return;
             }
 
-            TableLayoutPanelCellPosition cell1 = tblGame2.GetCellPosition(c1);
-            tblGame2.SetCellPosition(c1, tblGame2.GetCellPosition(c2));
-            tblGame2.SetCellPosition(c2, cell1);
+            // get the box current location and store it in this buffer
+            TableLayoutPanelCellPosition buffer = tblGame2.GetCellPosition(box);
+
+            // set the cell position of the box to it's new cell
+            tblGame2.SetCellPosition(box, tblGame2.GetCellPosition(cellToSwap));
+
+            // and place the old cell where the box was before
+            tblGame2.SetCellPosition(cellToSwap, buffer);
 
             // call the method again to see if we can move even farther
             MoveRight();
         }
 
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            // closes the form
+            if (boxes == 0)
+            {
+                EndGame();
+            }
+        }
+
+        private void closeToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
             FindForm().Close();
         }
 
