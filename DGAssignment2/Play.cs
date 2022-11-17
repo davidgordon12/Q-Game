@@ -21,7 +21,9 @@ namespace DGAssignment2
         PictureBox activeBox;
         int ROWS = 0, COLS = 0;
         int[,] level;
-        int moves, boxes = 0;
+        int moves, boxes, redBoxes, greenBoxes = 0;
+        int greenDoors, redDoors = 0;
+
         public Play()
         {
             InitializeComponent();
@@ -146,6 +148,14 @@ namespace DGAssignment2
                     tblGame2.Controls.Add(pBox, i, j);
                 }
             }
+
+            GetBoxesAndDoors();
+
+            timer1.Enabled = true;
+        }
+
+        void GetBoxesAndDoors()
+        {
             // check box count
             foreach (Control control in tblGame2.Controls)
             {
@@ -154,7 +164,36 @@ namespace DGAssignment2
             }
             lblBoxCounter.Text = $"Boxes Left: {boxes}";
 
-            timer1.Enabled = true;
+            // get all the doors
+            foreach (Control control in tblGame2.Controls)
+            {
+                if (control.Name == "2")
+                {
+                    redDoors++;
+                }
+                if (control.Name == "3")
+                {
+                    greenDoors++;
+                }
+            }
+
+            // get all green boxes
+            foreach (Control control in tblGame2.Controls)
+            {
+                if (control.Name == "5")
+                {
+                    greenBoxes++;
+                }
+            }
+
+            // get red boxes
+            foreach (Control control in tblGame2.Controls)
+            {
+                if (control.Name == "4")
+                {
+                    redBoxes++;
+                }
+            }
         }
 
         private void loadGameToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -288,6 +327,7 @@ namespace DGAssignment2
             if (cellToSwap.Name == "2" && activeBox.Name == "4")
             {
                 tblGame2.Controls.Remove(activeBox);
+                redBoxes--;
                 boxes--;
                 lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
@@ -296,6 +336,7 @@ namespace DGAssignment2
             if (cellToSwap.Name == "3" && activeBox.Name == "5")
             {
                 tblGame2.Controls.Remove(activeBox);
+                greenBoxes--;
                 boxes--;
                 lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
@@ -340,6 +381,7 @@ namespace DGAssignment2
             {
                 tblGame2.Controls.Remove(activeBox);
                 boxes--;
+                redBoxes--;
                 lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
             }
@@ -349,6 +391,7 @@ namespace DGAssignment2
             {
                 tblGame2.Controls.Remove(activeBox);
                 boxes--;
+                greenBoxes--;
                 lblBoxCounter.Text = $"Boxes Left: {boxes}";
                 return;
             }
@@ -374,9 +417,19 @@ namespace DGAssignment2
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (boxes == 0)
+            if(redDoors == 0 && greenDoors > 0)
             {
-                EndGame();
+                if (greenBoxes == 0)
+                {
+                    EndGame();
+                }
+            }
+            if (redDoors > 0 && greenDoors == 0)
+            {
+                if (redBoxes == 0)
+                {
+                    EndGame();
+                }
             }
         }
 
