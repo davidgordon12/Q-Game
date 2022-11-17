@@ -38,6 +38,8 @@ namespace DGAssignment2
         {
             // initialize grid
             var levelGrid = File.ReadAllLines(levelFile);
+            ROWS = 0;
+            COLS = 0;
 
             List<int> cellData = new List<int>();
 
@@ -248,12 +250,11 @@ namespace DGAssignment2
                 }
             }
 
-            tblGame2.Dispose();
             timer1.Stop();
             timer1.Enabled = false;
-            timer1.Dispose();
             MessageBox.Show("You win!", "QGame", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            FindForm().Close();
+
+            ClearGrid();
         }
 
         private void moveBox_Event(object sender, EventArgs e)
@@ -437,9 +438,22 @@ namespace DGAssignment2
         {
             FindForm().Close();
         }
+        void ResetVariables()
+        {
+            moves = 0;
+            boxes = 0;
+            greenDoors = 0;
+            redDoors = 0;
+            redBoxes = 0;
+            greenBoxes = 0;
+
+            lblMoveCounter.Text = $"Total Moves: {moves}";
+            lblBoxCounter.Text = $"Boxes Left: {boxes}";
+        }
 
         void ClearGrid()
         {
+            ResetVariables();
             // goes through the entire grid and disposes each control
             while (tblGame2.Controls.Count > 0)
             {
